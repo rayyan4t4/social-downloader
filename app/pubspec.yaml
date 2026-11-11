@@ -1,0 +1,24 @@
+name: social_downloader
+description: Download videos from TikTok, Instagram, YouTube, Facebook and X.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  http: ^1.2.2
+  path_provider: ^2.1.4
+  shared_preferences: ^2.3.2
+  share_plus: ^10.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

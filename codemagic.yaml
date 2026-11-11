@@ -1,0 +1,34 @@
+workflows:
+  ios-unsigned:
+    name: iOS Unsigned IPA
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    working_directory: app
+    environment:
+      flutter: stable
+      xcode: latest
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Build unsigned IPA
+        script: |
+          flutter build ios --release --no-codesign
+          mkdir -p build/ios/ipa/Payload
+          cp -r build/ios/iphoneos/Runner.app build/ios/ipa/Payload/
+          cd build/ios/ipa && zip -r SocialDownloader-unsigned.ipa Payload
+    artifacts:
+      - build/ios/ipa/*.ipa
+  android-apk:
+    name: Android APK
+    instance_type: linux_x2
+    max_build_duration: 60
+    working_directory: app
+    environment:
+      flutter: stable
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Build APK
+        script: flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
